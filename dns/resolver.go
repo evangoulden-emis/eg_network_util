@@ -6,6 +6,7 @@ import (
 )
 
 func Resolve(nameserver string, rdtype []string, fqdn string) {
+	// Testing merge to main
 	for _, recordType := range rdtype {
 		m1 := new(dns.Msg)
 		m1.Id = dns.Id()
