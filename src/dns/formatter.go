@@ -12,8 +12,8 @@ import (
 
 func FormatDNSResponse(msg *dns.Msg, rtt time.Duration) {
 	table := tablewriter.NewWriter(os.Stdout)
-	table.Header([]string{"Index","Name", "Type", "Class", "TTL", "Data"})
-	
+	table.Header([]string{"Index", "Name", "Type", "Class", "TTL", "Data"})
+
 	for idx, answer := range msg.Answer {
 		index := idx + 1
 		name := answer.Header().Name
@@ -21,7 +21,7 @@ func FormatDNSResponse(msg *dns.Msg, rtt time.Duration) {
 		class := dns.ClassToString[answer.Header().Class]
 		ttl := answer.Header().Ttl
 		data := answer.String()
-		
+
 		table.Append([]string{strconv.Itoa(index), name, rtype, class, strconv.FormatUint(uint64(ttl), 10), data})
 	}
 	fmt.Printf("Response Time: %v\n", rtt)

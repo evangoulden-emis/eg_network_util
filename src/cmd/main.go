@@ -4,7 +4,7 @@ import (
 	"flag"
 	"strings"
 
-	"eg_network_util/dns"
+	"eg_network_util/src/dns"
 )
 
 // Custom flag type which can be used to collect a range of different record types to test.
