@@ -12,11 +12,12 @@ var recordTypeFlag string
 
 func main() {
 	// Collect Flags from the user.
-	var nsFlag = flag.String("ns", "8.8.8.8", "DNS nameserver address [IP Address or FQDN]")
-	var dnsRecordFlag = flag.String("dns", "www.google.com", "DNS record to test")
-	var dnsRecordTypeFlag = flag.String("rdtype", "A, ", "Record type [A or AAAA], this option accepts a range of different values. For multiple values please pass a comma separate list")
-	var _ = flag.Int("asn", 1, "ASN number")                                  // TODO: Add variable name.
-	var _ = flag.String("bgp-cidr", "185.13.72.0/23", "CIDR range to lookup") // TODO: Add variable name.
+	var nsFlag = flag.String("n", "8.8.8.8", "DNS nameserver address [IP Address or FQDN]")
+	var dnsRecordFlag = flag.String("f", "www.google.com", "DNS record to test")
+	var dnsRecordTypeFlag = flag.String("r", "A, ", "Record type [A or AAAA], this option accepts a range of different values. For multiple values please pass a comma separate list")
+	var rawFlag = flag.Bool("raw", false, "Use raw UDP/TCP sockets for DNS queries (bypasses system DNS interception)")
+	var _ = flag.Int("a", 1, "ASN number")                                  // TODO: Add variable name.
+	var _ = flag.String("c", "185.13.72.0/23", "CIDR range to lookup") // TODO: Add variable name.
 	// Parse all of the flags passed to the application.
 	flag.Parse()
 
@@ -31,5 +32,5 @@ func main() {
 			recordTypeList = append(recordTypeList, trimmed)
 		}
 	}
-	dns.Resolve(*nsFlag, recordTypeList, *dnsRecordFlag)
+	dns.Resolve(*nsFlag, recordTypeList, *dnsRecordFlag, *rawFlag)
 }
